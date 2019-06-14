@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+<div id='app'>
+    <input v-model='message'>
+    <button @click='add()'>增加</button>
+<ul>
+    <li v-for='(t,index) in todos' :key="index">
+     <div v-bind:class='{over:t.done}'>
+         <input type='checkbox' v-model='t.done'/>{{t.name }} 
+         <button @click='down(index)'>删减</button>
+     </div>   
+    </li>
+</ul>
+</div>
+<style>
+  .over {
+    color:red;
+    text-decoration: line-through;
+}  
+</style>
+<script>
+    var t=new Vue({
+        el:'#app',
+    data:{
+        message:'',
+        todos:[
+        {name:'吃饭' ,done:false},
+        {name:'睡觉',done:false },
+        {name:'打豆豆',done:true}
+        ]
+    },
+    methods:{
+        add:function(){
+            this.todos.push({name:this.message , done:false})
+        },
+        down:function(index){
+            this.todos.splice(index,1)
+        }
+    }
+    })
+</script>
+</body>
+</html>
