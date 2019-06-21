@@ -7,9 +7,15 @@
 </head>
 <body>
 <div id='app'>
-    <input v-model='message'>
-    <button @click='add()'>添加</button>
-<ul>
+    <div class="search-box">
+    <input class='search-txt' v-model='message' type='text' placeholder="请输入关键字" size='30' >
+    <button @click='add()' style='color:blue;height: 30px;width: 50px;'>添加</button>
+    <a class="search-btn" href="#">
+     <i class="fas fa-search"></i>   
+    </a>    
+</div>
+<div class="box">
+    <ul>
     <li v-for='(t,index) in todos' :key="index">
      <div v-bind:class='{over:t.done}'>
          <input type='checkbox' v-model='t.done'/>{{t.name }} 
@@ -18,7 +24,63 @@
     </li>
 </ul>
 </div>
+</div>
 <style>
+    body{
+        margin:0;
+        padding:0;
+    }
+  .search-box{
+      position:absolute;
+      top:20%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      background: #2f3640;
+      height: 40px;
+      border-radius: 40px;
+      padding: 10px;
+ }
+ .search-btn {
+ color: #e84118;
+ float: right;
+ width: 40px;
+ height: 40px;
+ border-radius: 50%;
+ background: #2f3640;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ transition: 0.4s;
+ text-decoration: none;
+ }
+ .search-txt {
+ border: none;
+ background: none;
+ outline: none;
+ float: left;
+ padding: 0;
+ color: white;
+ font-size: 16px;
+ transition: 0.4s;
+ line-height: 40px;
+ width: 0;
+ }
+ .search-box:hover > .search-txt {
+ width: 240px;
+ padding: 0 6px;
+ }
+ .search-box:hover > .search-btn {
+ background: white;
+ }
+ .box{
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    height:40px;
+    border-radius: 40px;
+    padding: 10px;
+ }
   .over {
     color:red;
     text-decoration: line-through;
@@ -30,9 +92,9 @@
     data:{
         message:'',
         todos:[
-        {name:'吃饭' ,done:false},
-        {name:'睡觉',done:false },
-        {name:'打豆豆',done:true}
+        {name:'搜索' ,done:false},
+        {name:'运行',done:false },
+        {name:'编码',done:true}
         ]
     },
     methods:{
