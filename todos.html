@@ -8,12 +8,12 @@
 <body>
 <div id='app'>
     <input v-model='message'>
-    <button @click='add()'>增加</button>
+    <button @click='add()'>添加</button>
 <ul>
     <li v-for='(t,index) in todos' :key="index">
      <div v-bind:class='{over:t.done}'>
          <input type='checkbox' v-model='t.done'/>{{t.name }} 
-         <button @click='down(index)'>删减</button>
+         <button @click='down(index)'>×</button>
      </div>   
     </li>
 </ul>
