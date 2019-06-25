@@ -8,16 +8,13 @@
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
-    
         <div id='app'>
                 <div class="search-box">
                 <input class='search-txt' v-model='message' type='text' placeholder="请输入关键字,按回车添加" size='30' @keyup.enter='add()'>
-                
                 <a class="search-btn" href="#">
                  <i class="fas fa-search"></i>   
                 </a>    
             </div>
-        
 <div   class="box">
     <el-table
     :data="tableData"
@@ -48,7 +45,6 @@
     body{
         margin:0;
         padding:0;
-        background:white;
     }
   .search-box{
       position:absolute;
@@ -87,7 +83,7 @@
  
  }
  .search-box:hover > .search-txt {
- width: 240px;
+ width: 300px;
  padding: 0 6px;
  }
  .search-box:hover > .search-btn {
@@ -114,7 +110,6 @@
             }else{
                 alert("取消");
                                 }
-        
       },
       add:function(){
                       console.log(this.tableData)
@@ -131,7 +126,7 @@
         tableData: [{
           address: '上海市普陀区金沙江路 1518 弄',
         }, {
-          address: '上海市普陀区金沙江路 1518 弄',
+          address: '编码 运行',
         }, {
           address: '上海市普陀区金沙江路 1518 弄',
         }, 
