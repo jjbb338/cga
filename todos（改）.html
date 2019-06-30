@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
 <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
 <div id='app'>
     <div class="search-box">
-    <input class='search-txt' v-model='message' type='text' placeholder="请输入关键字" size='30' >
-    <button @click='add()' style='color:blue;height: 30px;width: 50px;'>添加</button>
+    <input class='search-txt' v-model='message' type='text' placeholder="请输入关键字,按回车添加" size='30' @keyup.enter='add()'>
     <a class="search-btn" href="#">
      <i class="fas fa-search"></i>   
     </a>    
@@ -19,7 +20,7 @@
     <li v-for='(t,index) in todos' :key="index">
      <div v-bind:class='{over:t.done}'>
          <input type='checkbox' v-model='t.done'/>{{t.name }} 
-         <button @click='down(index)'>×</button>
+         <button @click='down(index)' style='margin-left:95px'>×</button>
      </div>   
     </li>
 </ul>
@@ -29,6 +30,7 @@
     body{
         margin:0;
         padding:0;
+        background:white;
     }
   .search-box{
       position:absolute;
@@ -64,6 +66,7 @@
  transition: 0.4s;
  line-height: 40px;
  width: 0;
+ 
  }
  .search-box:hover > .search-txt {
  width: 240px;
@@ -81,10 +84,6 @@
     border-radius: 40px;
     padding: 10px;
  }
-  .over {
-    color:red;
-    text-decoration: line-through;
-}  
 </style>
 <script>
     var t=new Vue({
@@ -102,7 +101,13 @@
             this.todos.push({name:this.message , done:false})
         },
         down:function(index){
-            this.todos.splice(index,1)
+            
+            if(confirm("确实要删除吗？")){
+                      alert("已经删除！");
+                    this.todos.splice(index,1)
+                  }else {
+                      alert("已经取消了删除操作");
+                  }
         }
     }
     })
