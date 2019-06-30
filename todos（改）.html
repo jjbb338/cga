@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
-<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
@@ -15,16 +15,31 @@
      <i class="fas fa-search"></i>   
     </a>    
 </div>
-<div class="box">
-    <ul>
-    <li v-for='(t,index) in todos' :key="index">
-     <div v-bind:class='{over:t.done}'>
-         <input type='checkbox' v-model='t.done'/>{{t.name }} 
-         <button @click='down(index)' style='margin-left:95px'>×</button>
-     </div>   
-    </li>
-</ul>
-</div>
+<div class="box" >
+    <el-table
+    :data="tableData"
+    style="width: 100%"
+    max-height="250">
+    <el-table-column
+      prop="address"
+      label="信息"
+      width="300">
+    </el-table-column>
+    <el-table-column
+    fixed="right"
+    label="操作"
+    width="120">
+    <template slot-scope="scope">
+      <el-button
+        @click.native.prevent="deleteRow(scope.$index, tableData)"
+        type="text"
+        size="small">
+        移除
+      </el-button>
+    </template>
+  </el-table-column>
+  </el-table>
+  </div>
 </div>
 <style>
     body{
@@ -84,32 +99,29 @@
     border-radius: 40px;
     padding: 10px;
  }
+
 </style>
 <script>
     var t=new Vue({
         el:'#app',
+        methods: {
+      deleteRow(index, rows) {
+        rows.splice(index, 1);
+      },
+      add:function(){
+            this.tableData.push({address:this.message })
+        },
+    },
     data:{
         message:'',
-        todos:[
-        {name:'搜索' ,done:false},
-        {name:'运行',done:false },
-        {name:'编码',done:true}
-        ]
-    },
-    methods:{
-        add:function(){
-            this.todos.push({name:this.message , done:false})
-        },
-        down:function(index){
-            
-            if(confirm("确实要删除吗？")){
-                      alert("已经删除！");
-                    this.todos.splice(index,1)
-                  }else {
-                      alert("已经取消了删除操作");
-                  }
-        }
-    }
+        tableData: [{
+          address: '上海市普陀区金沙江路 1518 弄',          
+        }, {
+          address: '上海市普陀区金沙江路 1518 弄',
+        }, {
+          address: '上海市普陀区金沙江路 1518 弄',         
+        }, 
+        ]}
     })
 </script>
 </body>
